@@ -196,7 +196,6 @@ TreeType::TreeType()
   root = NULL;
 }
 
-void Destroy(TreeNode*& tree);
 
 TreeType::~TreeType()
 // Calls recursive function Destroy to destroy the tree.
@@ -204,8 +203,7 @@ TreeType::~TreeType()
   Destroy(root);
 }
 
-
-void Destroy(TreeNode*& tree)
+void TreeType::Destroy(TreeNode*& tree)
 // Post: tree is empty; nodes have been deallocated.
 {
   if (tree != NULL)
@@ -223,8 +221,6 @@ void TreeType::MakeEmpty()
 }
 
 
-void CopyTree(TreeNode*& copy, 
-     const TreeNode* originalTree);
 
 TreeType::TreeType(const TreeType& originalTree)
 // Calls recursive function CopyTree to copy originalTree 
@@ -246,7 +242,7 @@ void TreeType::operator=
   }
 
 }
-void CopyTree(TreeNode*& copy, 
+void TreeType::CopyTree(TreeNode*& copy, 
      const TreeNode* originalTree)
 // Post: copy is the root of a tree that is a duplicate 
 //       of originalTree.
