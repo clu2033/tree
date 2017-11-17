@@ -14,13 +14,17 @@ void Insert(TreeNode*& tree, ItemType item);
 void DeleteNode(TreeNode*& tree);
 void Delete(TreeNode*& tree, ItemType item);
 void GetPredecessor(TreeNode* tree, ItemType& data);
+void PrintTree(TreeNode* tree);
 // Function prototypes for auxiliary functions.
 void PreOrder(TreeNode*, QueType&);
 void InOrder(TreeNode*, QueType&);
 void PostOrder(TreeNode*, QueType&);
 
+int GetHeight(TreeNode* tree);
+void PrintLevel(TreeNode* tree);
+void LevelOrder(TreeNode* tree);
+
 bool TreeType::IsFull() const
-// Returns true if there is no room for another item on the free store; false otherwise.
 {
     TreeNode* location;
     try
@@ -82,7 +86,6 @@ void Retrieve(TreeNode* tree, ItemType& item, bool& found)
 } 
 
 void TreeType::PutItem(ItemType item)
-// Calls recursive function Insert to insert item into tree.
 {
     Insert(root, item);
 }
@@ -164,21 +167,20 @@ void GetPredecessor(TreeNode* tree, ItemType& data)
     data = tree->info;
 }
 
+void TreeType::Print() const
+{
+    PrintTree(root);
+}
+
 void PrintTree(TreeNode* tree) 
 // Prints info member of items in tree in sorted order on screen.
 {
     if (tree != NULL)
     {
         PrintTree(tree->left);   // Print left subtree.
-        cout << tree->info<<"  ";
+        cout << tree->info << "  ";
         PrintTree(tree->right);  // Print right subtree.
     }
-}
-
-void TreeType::Print() const
-// Calls recursive function Print to print items in the tree.
-{
-    PrintTree(root);
 }
 
 TreeType::TreeType()
@@ -210,20 +212,18 @@ void TreeType::MakeEmpty()
 }
 
 TreeType::TreeType(const TreeType& originalTree)
-// Calls recursive function CopyTree to copy originalTree 
-//  into root.
+// Calls recursive function CopyTree to copy originalTree into root.
 {
     CopyTree(root, originalTree.root);
 }
 
-void TreeType::operator= (const TreeType& originalTree)
-// Calls recursive function CopyTree to copy originalTree 
-// into root.
+void TreeType::operator=(const TreeType& originalTree)
+// Calls recursive function CopyTree to copy originalTree into root.
 {
     {
     if (&originalTree == this)
-        return;             // Ignore assigning self to self
-    Destroy(root);      // Deallocate existing tree nodes
+        return;      // Ignore assigning self to self
+    Destroy(root);   // Deallocate existing tree nodes
     CopyTree(root, originalTree.root);
     }
 }
@@ -323,3 +323,46 @@ ItemType TreeType::GetNextItem(OrderType order, bool& finished)
   return item;
 }
 
+
+int GetHeight(TreeNode* tree)
+{
+    if (tree == NULL)
+        return 0;
+    else
+    {
+        int left = GetHeight(tree->left);
+        int right = GetHeight(tree->right);
+        if (left > right)
+            return (left + 1);
+        else
+            return (right + 1);
+    }
+}
+
+void PrintLevel(TreeNode* tree, int level)
+{
+    if (tree == NULL)
+        return;
+    if (level == 1)
+        cout << tree->info << " ";
+    else if (level > 1)
+    {
+        PrintLevel(tree->left, level-1);
+        PrintLevel(tree->right, level-1);
+    }
+    cout << endl;
+}
+
+void LevelOrder(TreeNode* tree)
+{
+    int h = GetHeight(tree);
+    for (int i=1; i<=h; i++)
+    {
+        PrintLevel(tree, i);
+    }
+}
+
+void TreeType::LevelOrderPrint() const
+{
+    LevelOrder(root);
+}
