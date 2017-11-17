@@ -1,9 +1,9 @@
 compile:
-	g++ -g -Wall -std=c++14 -g -O0 -pedantic-errors -o Driver Driver.cpp TreeType.cpp QueType.cpp 
+	g++ -g -Wall -std=c++14 -g -O0 -pedantic-errors -o TreeDr TreeDr.cpp TreeType.cpp QueType.cpp 
 
 run: 
-	./Driver
+	./TreeDr
 
 clean:
-	rm -f Driver
+	rm -f TreeDr
 	rm -f *.o

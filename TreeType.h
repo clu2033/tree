@@ -1,9 +1,12 @@
+#ifndef TREETYPE_H
+#define TREETYPE_H
 #include <string>
 #include <fstream>
+#include "QueType.h"
 typedef int ItemType;
 struct TreeNode;
-#include "QueType.h"
 enum OrderType {PRE_ORDER, IN_ORDER, POST_ORDER};
+
 class TreeType
 {
 public:
@@ -32,3 +35,4 @@ private:
   QueType postQue;
 };
 
+#endif /* TREE_TYPE_H */
