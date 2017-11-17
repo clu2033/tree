@@ -181,6 +181,7 @@ void PrintTree(TreeNode* tree)
         cout << tree->info << "  ";
         PrintTree(tree->right);  // Print right subtree.
     }
+    cout << endl;
 }
 
 TreeType::TreeType()
@@ -350,7 +351,6 @@ void PrintLevel(TreeNode* tree, int level)
         PrintLevel(tree->left, level-1);
         PrintLevel(tree->right, level-1);
     }
-    cout << endl;
 }
 
 void LevelOrder(TreeNode* tree)
@@ -358,7 +358,9 @@ void LevelOrder(TreeNode* tree)
     int h = GetHeight(tree);
     for (int i=1; i<=h; i++)
     {
+        cout << "level " << i << ": ";
         PrintLevel(tree, i);
+        cout << endl;
     }
 }
 
