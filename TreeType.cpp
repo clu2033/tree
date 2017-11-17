@@ -308,22 +308,24 @@ ItemType TreeType::GetNextItem(OrderType order, bool& finished)
   ItemType item;
   switch (order)
   {
-    case PRE_ORDER  : preQue.Dequeue(item);
-                      if (preQue.IsEmpty())
-                        finished = true;
-                      break;
-    case IN_ORDER   : inQue.Dequeue(item);
-                      if (inQue.IsEmpty())
-                        finished = true;
-                      break;
-    case  POST_ORDER: postQue.Dequeue(item);
-                      if (postQue.IsEmpty())
-                        finished = true;
-                      break;
-  }
-  return item;
+    case PRE_ORDER: 
+        preQue.Dequeue(item);
+        if (preQue.IsEmpty())
+            finished = true;
+        break;
+    case IN_ORDER: 
+        inQue.Dequeue(item);
+        if (inQue.IsEmpty())
+            finished = true;
+        break;
+    case  POST_ORDER:
+        postQue.Dequeue(item);
+        if (postQue.IsEmpty())
+            finished = true;
+        break;
+    }
+    return item;
 }
-
 
 int GetHeight(TreeNode* tree)
 {
@@ -367,4 +369,44 @@ void LevelOrder(TreeNode* tree)
 void TreeType::LevelOrderPrint() const
 {
     LevelOrder(root);
+}
+
+
+void TreeType::PreOrderPrint(QueType& queue)
+{
+    PreOrder(root, queue);
+    ItemType item;
+    cout << "PreOrder:\t";
+    while (!queue.IsEmpty())
+    {
+        queue.Dequeue(item);
+        cout << item << " ";
+    }
+    cout << endl;
+}
+
+void TreeType::InOrderPrint(QueType& queue)
+{
+    InOrder(root, queue);
+    ItemType item;
+    cout << "InOrder:\t";
+    while (!queue.IsEmpty())
+    {
+        queue.Dequeue(item);
+        cout << item << " ";
+    }
+    cout << endl;
+}
+
+void TreeType::PostOrderPrint(QueType& queue)
+{
+    PostOrder(root, queue);
+    ItemType item;
+    cout << "PostOrder:\t";
+    while (!queue.IsEmpty())
+    {
+        queue.Dequeue(item);
+        cout << item << " ";
+    }
+    cout << endl;
 }

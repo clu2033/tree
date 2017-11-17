@@ -1,6 +1,7 @@
 // Header file for Queue ADT. 
 #include <new>
 #include <cstddef>
+
 class FullQueue
 {};  
 
@@ -44,6 +45,6 @@ public:
     //       item is a copy of removed element.
 private:
 
-  NodeType* front;
-  NodeType* rear;
+    NodeType* front;
+    NodeType* rear;
 };

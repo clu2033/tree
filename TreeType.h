@@ -28,6 +28,9 @@ public:
   void CopyTree(TreeNode*& copy, const TreeNode* originalTree);
 
   void LevelOrderPrint() const;
+  void PreOrderPrint(QueType& queue);
+  void InOrderPrint(QueType& queue);
+  void PostOrderPrint(QueType& queue);
 
 
 private:

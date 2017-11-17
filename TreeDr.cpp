@@ -5,7 +5,8 @@ using namespace std;
 
 int main()
 {
-    TreeType t; 
+    TreeType t;
+    QueType pre, post, in; 
     t.PutItem(3);
     t.PutItem(9);
     t.PutItem(2);
@@ -16,5 +17,8 @@ int main()
     t.PutItem(1);
     // t.Print();
     t.LevelOrderPrint();
+    t.PreOrderPrint(pre);
+    t.PostOrderPrint(post);
+    t.InOrderPrint(in);
     return 0;
 }
