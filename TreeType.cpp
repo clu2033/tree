@@ -24,6 +24,8 @@ int GetHeight(TreeNode* tree);
 void PrintLevel(TreeNode* tree);
 void LevelOrder(TreeNode* tree);
 
+TreeNode* PtrToSuccessor(TreeNode*& tree);
+
 bool TreeType::IsFull() const
 {
     TreeNode* location;
@@ -153,11 +155,21 @@ void DeleteNode(TreeNode*& tree)
     }
     else
     {
-        GetPredecessor(tree->left, data);
+        tempPtr = PtrToSuccessor(tree->left);
+        data = tempPtr->info;
         tree->info = data;
         Delete(tree->left, data);  // Delete predecessor node.
     }
 }
+
+// Requirement 4
+TreeNode* PtrToSuccessor(TreeNode*& tree)
+{
+    while (tree->left != NULL)
+        tree = tree->left;
+    return tree;
+}
+
 
 void GetPredecessor(TreeNode* tree, ItemType& data)
 // Sets data to the info member of the right-most node in tree.
@@ -181,7 +193,8 @@ void PrintTree(TreeNode* tree)
         cout << tree->info << "  ";
         PrintTree(tree->right);  // Print right subtree.
     }
-    cout << endl;
+    else
+        cout << endl;
 }
 
 TreeType::TreeType()
@@ -366,12 +379,13 @@ void LevelOrder(TreeNode* tree)
     }
 }
 
+// Requirement 2
 void TreeType::LevelOrderPrint() const
 {
     LevelOrder(root);
 }
 
-
+// Requirement 3
 void TreeType::PreOrderPrint(QueType& queue)
 {
     PreOrder(root, queue);
@@ -410,3 +424,8 @@ void TreeType::PostOrderPrint(QueType& queue)
     }
     cout << endl;
 }
+
+
+
+
+

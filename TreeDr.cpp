@@ -15,7 +15,11 @@ int main()
     t.PutItem(0);
     t.PutItem(6);
     t.PutItem(1);
-    // t.Print();
+    t.Print();
+    t.LevelOrderPrint();
+    // t.DeleteItem(4);
+    // t.DeleteItem(1);
+    t.DeleteItem(3);
     t.LevelOrderPrint();
     t.PreOrderPrint(pre);
     t.PostOrderPrint(post);

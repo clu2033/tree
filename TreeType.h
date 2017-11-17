@@ -38,6 +38,7 @@ private:
   QueType preQue;
   QueType inQue;
   QueType postQue;
+  // TreeNode* PtrToSuccessor(TreeNode*& Tree);
 };
 
 #endif /* TREE_TYPE_H */
