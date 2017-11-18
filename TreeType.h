@@ -6,14 +6,14 @@
 typedef int ItemType;
 struct TreeNode;
 enum OrderType {PRE_ORDER, IN_ORDER, POST_ORDER};
-
+template<class ItemType>
 class TreeType
 {
 public:
   TreeType();                     // constructor
  ~TreeType();                    // destructor
-  TreeType(const TreeType& originalTree); // copy constructor
-  void operator=(const TreeType& originalTree);
+  TreeType(const TreeType<ItemType>& originalTree); // copy constructor
+  void operator=(const TreeType<ItemType>& originalTree);
   void MakeEmpty();
   bool IsEmpty() const;
   bool IsFull() const;
@@ -33,14 +33,13 @@ public:
   void PostOrderPrint(QueType& queue);
 
   void Ancestors(ItemType value);
-  TreeType MirrorImage();
+  TreeType<ItemType> MirrorImage();
 
 private:
   TreeNode* root;
   QueType preQue;
   QueType inQue;
   QueType postQue;
-  // TreeNode* PtrToSuccessor(TreeNode*& Tree);
 };
 
 #endif /* TREE_TYPE_H */

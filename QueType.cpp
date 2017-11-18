@@ -8,13 +8,17 @@ struct NodeType
   NodeType* next;
 };
 
-QueType::QueType()          // Class constructor.
+// template<class ItemType>
+// QueType<ItemType>::QueType()
+QueType::QueType()
 // Post:  front and rear are set to NULL.
 {
   front = NULL;
   rear = NULL;
 }
 
+// template<class ItemType>
+// void QueType<ItemType>::MakeEmpty()
 void QueType::MakeEmpty()
 // Post: Queue is empty; all elements have been deallocated.
 {
@@ -29,12 +33,15 @@ void QueType::MakeEmpty()
   rear = NULL;
 }
 
-// Class destructor.
+// template<class ItemType>
+// QueType<ItemType>::~QueType()
 QueType::~QueType()
 {
   MakeEmpty();
 }
 
+// template<class ItemType>
+// bool QueType<ItemType>::IsFull() const
 bool QueType::IsFull() const
 // Returns true if there is no room for another ItemType 
 //  on the free store; false otherwise.
@@ -52,12 +59,15 @@ bool QueType::IsFull() const
   }
 }
 
+// template<class ItemType>
+// bool QueType<ItemType>::IsEmpty() const
 bool QueType::IsEmpty() const
-// Returns true if there are no elements on the queue; false otherwise.
 {
   return (front == NULL);
 }
 
+// template<class ItemType>
+// void QueType<ItemType>::Enqueue(ItemType newItem)
 void QueType::Enqueue(ItemType newItem)
 // Adds newItem to the rear of the queue.
 // Pre:  Queue has been initialized.
@@ -80,6 +90,8 @@ void QueType::Enqueue(ItemType newItem)
   }
 }
 
+// template<class ItemType>
+// void QueType<ItemType>::Dequeue(ItemType& item)
 void QueType::Dequeue(ItemType& item)
 // Removes front item from the queue and returns it in item.
 // Pre:  Queue has been initialized and is not empty.
@@ -102,6 +114,8 @@ void QueType::Dequeue(ItemType& item)
   }
 }
 
+// template<class ItemType>
+// QueType<ItemType>::QueType(const QueType& anotherQue) 
 QueType::QueType(const QueType& anotherQue) 
 {
   NodeType* ptr1;
@@ -126,3 +140,7 @@ QueType::QueType(const QueType& anotherQue)
     rear = ptr2;
   }    
 }
+
+// template class QueType<int>;
+// template class QueType<string>;
+// template class QueType<char>;

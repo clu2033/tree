@@ -11,6 +11,7 @@ typedef int ItemType;
 
 struct NodeType;
 
+// template<class ItemType>
 class QueType
 {
 public: 

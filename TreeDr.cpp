@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	TreeType t;
+	TreeType<int> t;
 	QueType pre, post, in; 
 	t.PutItem(3);
 	t.PutItem(5);
