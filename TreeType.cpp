@@ -25,6 +25,7 @@ void PrintLevel(TreeNode* tree);
 void LevelOrder(TreeNode* tree);
 
 TreeNode* PtrToSuccessor(TreeNode*& tree);
+void GetSuccessor(TreeNode* tree, ItemType& data);
 
 bool printAncestors(TreeNode* tree, ItemType value);
 
@@ -157,12 +158,7 @@ void DeleteNode(TreeNode*& tree)
     }
     else
     {
-        tempPtr = PtrToSuccessor(tree->right);
-        data = tempPtr->info;
-
-        // tree->info = data;
-        // GetPredecessor(tree->left, data);
-
+        GetSuccessor(tree->right, data);
         tree->info = data;
         cout << data << endl;
         Delete(tree->right, data);  // Delete successor node.
@@ -176,6 +172,14 @@ TreeNode* PtrToSuccessor(TreeNode*& tree)
     while (tree->left != NULL)
         tree = tree->left;
     return tree;
+}
+
+void GetSuccessor(TreeNode* tree, ItemType& data)
+// Sets data to the info member of the right-most node in tree.
+{
+    while (tree->left != NULL)
+        tree = tree->left;
+    data = tree->info;
 }
 
 void GetPredecessor(TreeNode* tree, ItemType& data)
