@@ -32,6 +32,8 @@ public:
   void InOrderPrint(QueType& queue);
   void PostOrderPrint(QueType& queue);
 
+  void Ancestors(ItemType value);
+  TreeType MirrorImage();
 
 private:
   TreeNode* root;

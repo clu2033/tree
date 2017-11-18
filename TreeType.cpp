@@ -26,6 +26,8 @@ void LevelOrder(TreeNode* tree);
 
 TreeNode* PtrToSuccessor(TreeNode*& tree);
 
+bool printAncestors(TreeNode* tree, ItemType value);
+
 bool TreeType::IsFull() const
 {
     TreeNode* location;
@@ -155,10 +157,16 @@ void DeleteNode(TreeNode*& tree)
     }
     else
     {
-        tempPtr = PtrToSuccessor(tree->left);
+        tempPtr = PtrToSuccessor(tree->right);
         data = tempPtr->info;
+
+        // tree->info = data;
+        // GetPredecessor(tree->left, data);
+
         tree->info = data;
-        Delete(tree->left, data);  // Delete predecessor node.
+        cout << data << endl;
+        Delete(tree->right, data);  // Delete successor node.
+        // Delete(tree->left, data);  // Delete predecessor node.
     }
 }
 
@@ -169,7 +177,6 @@ TreeNode* PtrToSuccessor(TreeNode*& tree)
         tree = tree->left;
     return tree;
 }
-
 
 void GetPredecessor(TreeNode* tree, ItemType& data)
 // Sets data to the info member of the right-most node in tree.
@@ -182,6 +189,7 @@ void GetPredecessor(TreeNode* tree, ItemType& data)
 void TreeType::Print() const
 {
     PrintTree(root);
+    cout << endl;
 }
 
 void PrintTree(TreeNode* tree) 
@@ -193,8 +201,6 @@ void PrintTree(TreeNode* tree)
         cout << tree->info << "  ";
         PrintTree(tree->right);  // Print right subtree.
     }
-    else
-        cout << endl;
 }
 
 TreeType::TreeType()
@@ -425,7 +431,66 @@ void TreeType::PostOrderPrint(QueType& queue)
     cout << endl;
 }
 
+bool printAncestors(TreeNode* tree, ItemType value)
+{
+    if (tree == NULL)
+        return false;
+    if (tree->info == value)
+        return true;
+    if (printAncestors(tree->left, value) || printAncestors(tree->right, value))
+    {
+        cout << tree->info << " ";
+        return true;
+    }
+    return false;
+}
+
+void TreeType::Ancestors(ItemType value)
+{
+    cout << "Ancestors: ";
+    printAncestors(root, value);
+    cout << endl;
+}
 
 
+
+void swap(TreeNode* root);
+TreeType rootToTree(TreeNode* root);
+
+// Requirement 8
+
+void swap(TreeNode* root)
+{   
+   if(root != NULL)
+   {
+       TreeNode* temp = root->left;
+       root->left = root->right;
+       root->right = temp;
+       swap(root->left);
+       swap(root->right);
+   }
+}
+
+TreeType rootToTree(TreeNode* root)
+{
+   TreeType newTree;
+   QueType q;
+   PreOrder(root, q);
+   while (!q.IsEmpty())
+   {
+       ItemType item;
+       q.Dequeue(item);
+       newTree.PutItem(item);
+   }
+   return newTree;
+}
+
+TreeType TreeType::MirrorImage()
+{
+    TreeType mirror = rootToTree(root);
+    TreeType m = TreeType(mirror);
+    swap(m.root);
+    return m;
+}
 
 
